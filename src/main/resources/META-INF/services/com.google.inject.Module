@@ -1,0 +1,3 @@
+tools.prefdumper.module.AppConfig
+tools.prefdumper.plugin.module.JolokiaSimpleModule
+tools.prefdumper.plugin.module.JolokiaCalcModule

@@ -1,0 +1,13 @@
+[
+	{
+		"confType" : "JolokiaSimple",
+		"settings" : {
+			"key" : "keyword",
+			"requestUrl" : "http://localhost:8080/jolokia",
+			"mbeanPath" : "java.lang:type=Memory",
+			"mbeanAttribute" : "HeapMemoryUsage",
+			"mbeanValue" : "used",
+			"interval" : 5
+		}
+	}
+]
