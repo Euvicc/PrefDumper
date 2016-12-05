@@ -1,0 +1,23 @@
+machine:
+  timezone: Asia/Tokyo
+
+#  hosts:  #/etc/hosts を書き換える
+#    xxxxxx.com: 127.0.0.1
+
+#  environment:
+  java:
+    version: openjdk6
+
+## Customize checkout
+checkout:
+  post:
+    - git submodule sync
+    - git submodule update --init # use submodules
+
+test:
+  pre:
+    - echo "----- start test -----"
+#  override:
+#    - gradle test
+  post:
+    - echo "------ end test ------"
