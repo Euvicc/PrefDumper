@@ -6,7 +6,7 @@ machine:
 
 #  environment:
   java:
-    version: openjdk6
+    version: openjdk7
 
 ## Customize checkout
 checkout:
