@@ -30,6 +30,7 @@ test:
     - echo "----- start test -----"
   override:
     - ./gradlew --full-stacktrace check
+    - ./gradlew
   post:
     # jUnitをCircleCIで可視化するための記述(see:http://qiita.com/tomoima525/items/b4a91d1624aaf0112b3f)
     - mkdir -p $CIRCLE_TEST_REPORTS/junit/
@@ -39,6 +40,15 @@ test:
 
 general:
   artifacts:
-    - "app/build/reports/tests"
-    - "app/build/reports/pmd"
-    - "app/build/reports/findbugs"
+    - "build/reports/tests"
+    - "build/reports/pmd"
+    - "build/reports/findbugs"
+    - "build/distributions"
+
+deployment:
+  release:
+    tag: /v(0|[1-9][0-9]*)(\.(0|[1-9][0-9]*)){2}/
+    commands:
+      - go get -u github.com/tcnksm/ghr
+      - cp $CIRCLE_ARTIFACTS/dist/*.zip .
+      - ghr -t ${GITHUB_TOKEN} -u ${USERNAME} -r ${CIRCLE_PROJECT_REPONAME} --replace $(cat release_tag) build/distributions/
