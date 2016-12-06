@@ -30,19 +30,17 @@ test:
     - echo "----- start test -----"
   override:
     - ./gradlew --full-stacktrace check
-    - ./gradlew
+    - ./gradlew build check jacocoTestReport
   post:
-    # jUnitをCircleCIで可視化するための記述(see:http://qiita.com/tomoima525/items/b4a91d1624aaf0112b3f)
+    # やっぱりこれは必要で、CircleCIで簡易表示してくれるらしい。
     - mkdir -p $CIRCLE_TEST_REPORTS/junit/
-    - find . -type f -regex ".*/test-results/*/.*xml" -exec cp {} $CIRCLE_TEST_REPORTS/junit/ \;
-
+    - find . -type f -regex ".*/build/test-results/.*xml" -exec cp {} $CIRCLE_TEST_REPORTS/junit/ \;
+    # 全部がっつりコピーしちゃうでもOKぽい（see:http://mao-instantlife.hatenablog.com/entry/2015/08/25/CircleCIを使ってJavaリポジトリの静的解析などのレポー）
+    - cp -r build/reports/* $CIRCLE_TEST_REPORTS/
     - echo "------ end test ------"
 
 general:
   artifacts:
-    - "build/reports/tests"
-    - "build/reports/pmd"
-    - "build/reports/findbugs"
     - "build/distributions"
 
 deployment:
