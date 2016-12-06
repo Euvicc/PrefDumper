@@ -130,19 +130,13 @@ pmd {
   ]
 }
 
-// JaCoCo coverage reports
-jacoco {
-  applyTo(tasks.withType(JavaExec))
-}
-test {
-  jacoco {
-    enabled = true
-    destinationFile = file('build/reports/jacoco/jacoco.exec')
-  }
-}
-task jacocoReport(type: JacocoReport) {
-  executionData test
-  sourceSets project.sourceSets.main
+jacocoTestReport {
+    group = "Reporting"
+    reports {
+        xml.enabled true
+        csv.enabled false
+        html.destination "${buildDir}/reports/coverage"
+    }
 }
 
 // checkにCPDを追加
