@@ -21,8 +21,6 @@ machine:
   - sudo service postgresql stop
 
 dependencies:
-  pre:
-    - chmod -x ./gradlew
   override:
     - ./gradlew -v
     - ./gradlew testClasses
